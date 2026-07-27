@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Reading {
+  id            Int      @id @default(autoincrement())
+  state         String
+  city          String
+  station       String
+  pollutantId   String
+  pollutantMin  String?
+  pollutantMax  String?
+  pollutantAvg  String?
+  lastUpdate    String
+  fetchedAt     DateTime @default(now())
+}
