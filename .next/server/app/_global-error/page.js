@@ -1,0 +1,10 @@
+var R=require("../../chunks/ssr/[turbopack]_runtime.js")("server/app/_global-error/page.js")
+R.c("server/chunks/ssr/[root-of-the-server]__0rf9f3c._.js")
+R.c("server/chunks/ssr/1bor_0-v6qn3._.js")
+R.c("server/chunks/ssr/1bor_next_dist_esm_build_templates_app-page_0mwxf14.js")
+R.c("server/chunks/ssr/[root-of-the-server]__1miy-bs._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__0ghbxco._.js")
+R.c("server/chunks/ssr/1bor_next_dist_client_components_builtin_global-error_0qxukm6.js")
+R.c("server/chunks/ssr/aqi-project__next-internal_server_app__global-error_page_actions_0wk0623.js")
+R.m(59257)
+module.exports=R.m(59257).exports

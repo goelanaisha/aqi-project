@@ -1,2 +1,1 @@
-{"timestamp":"00:00:01.338","source":"Server","level":"ERROR","message":"TypeScript 7.0.2 does not provide the compiler API required by Next.js. Enable experimental.useTypeScriptCli in your Next.js config to use the TypeScript CLI, or install TypeScript 6 instead."}
-{"timestamp":"00:00:01.346","source":"Server","level":"ERROR","message":"Unhandled Rejection: Error: TypeScript 7.0.2 does not provide the compiler API required by Next.js. Enable experimental.useTypeScriptCli in your Next.js config to use the TypeScript CLI, or install TypeScript 6 instead."}
+{"timestamp":"00:00:00.454","source":"Server","level":"LOG","message":""}
