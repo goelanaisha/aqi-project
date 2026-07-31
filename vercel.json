@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/fetch-aqi",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}

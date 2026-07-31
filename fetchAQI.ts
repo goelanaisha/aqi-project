@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -17,8 +18,13 @@ interface AQIRecord {
   max_value: string;
   avg_value: string;
 }
+export async function GET(request: Request) {
+  const authHeader = request.headers.get('authorization');
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
-async function fetchAQIData() {
+
   const url = `https://api.data.gov.in/resource/${RESOURCE_ID}?api-key=${API_KEY}&format=json&limit=50&filters[city]=Delhi`;
 
   try {
@@ -51,5 +57,3 @@ async function fetchAQIData() {
     await prisma.$disconnect();
   }
 }
-
-fetchAQIData();
