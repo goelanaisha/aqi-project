@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import AQIDashboardControls from '@/components/AQIDashboardControls';
+import { getAQICategory } from '@/lib/aqiCategory';
 
 export default async function Home() {
   const readings = await prisma.reading.findMany({
@@ -24,22 +25,38 @@ export default async function Home() {
       <table style={{ borderCollapse: 'collapse', width: '100%', marginTop: '1rem' }}>
         <thead>
           <tr>
-            <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Station</th>
-            <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Pollutant</th>
-            <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Avg Value</th>
-            <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Last Updated</th>
-          </tr>
-        </thead>
-        <tbody>
-          {latest.map((r) => (
-            <tr key={r.id}>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{r.station}</td>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{r.pollutantId}</td>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{r.pollutantAvg}</td>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{r.lastUpdate}</td>
-            </tr>
-          ))}
-        </tbody>
+    <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Station</th>
+    <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Pollutant</th>
+    <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Avg Value</th>
+    <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Category</th>
+    <th style={{ textAlign: 'left', borderBottom: '1px solid #ccc', padding: '8px' }}>Last Updated</th>
+  </tr>
+</thead>
+          <tbody>
+  {latest.map((r) => {
+    const category = getAQICategory(r.pollutantId, r.pollutantAvg);
+    return (
+      <tr key={r.id}>
+        <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{r.station}</td>
+        <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{r.pollutantId}</td>
+        <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{r.pollutantAvg}</td>
+        <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>
+          <span style={{
+            backgroundColor: category.color,
+            color: 'white',
+            padding: '2px 8px',
+            borderRadius: '4px',
+            fontSize: '0.85rem',
+          }}>
+            {category.label}
+          </span>
+        </td>
+        <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{r.lastUpdate}</td>
+      </tr>
+    );
+  })}
+</tbody>
+        
       </table>
     </main>
   );
