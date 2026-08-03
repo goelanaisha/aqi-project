@@ -1,9 +1,7 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import {prisma} from '@/lib/prisma';
 
 const RESOURCE_ID = '3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69';
 const API_KEY = process.env.DATA_GOV_API_KEY;
@@ -53,7 +51,5 @@ export async function GET(request: Request) {
     console.log('All records inserted successfully');
   } catch (err) {
     console.error('Error fetching AQI data:', err);
-  } finally {
-    await prisma.$disconnect();
-  }
+  } 
 }

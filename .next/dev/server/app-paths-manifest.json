@@ -1,5 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/fetch-aqi/route": "app/api/fetch-aqi/route.js",
   "/page": "app/page.js"
 }
