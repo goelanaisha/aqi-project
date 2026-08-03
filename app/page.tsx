@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import AQIChart from '@/components/AQIchart';
 
 export default async function Home() {
   const readings = await prisma.reading.findMany({
@@ -19,6 +20,7 @@ export default async function Home() {
   return (
     <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
       <h1>Delhi AQI Dashboard</h1>
+      <AQIChart station="ITO, Delhi - CPCB" pollutantId="PM2.5" />
       <table style={{ borderCollapse: 'collapse', width: '100%', marginTop: '1rem' }}>
         <thead>
           <tr>
