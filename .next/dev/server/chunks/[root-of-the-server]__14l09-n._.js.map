@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///Users/anaishagoel/aqi-project/lib/prisma.ts"],"sourcesContent":["import { PrismaClient } from '@prisma/client';\n\nconst globalForPrisma = globalThis as typeof globalThis & {\n  prisma?: PrismaClient;\n};\n\nexport const prisma =\n  globalForPrisma.prisma ||\n  new PrismaClient();\n\nif (process.env.NODE_ENV !== 'production') {\n  globalForPrisma.prisma = prisma;\n}\n"],"names":["globalForPrisma","globalThis","prisma"],"mappings":";;;;AAAA;;AAEA,MAAMA,kBAAkBC;AAIjB,MAAMC,SACXF,gBAAgBE,MAAM,IACtB,IAAI,wNAAY;AAElB,wCAA2C;IACzCF,gBAAgBE,MAAM,GAAGA;AAC3B"}},
+    {"offset": {"line": 61, "column": 0}, "map": {"version":3,"sources":["file:///Users/anaishagoel/aqi-project/app/api/stations/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\nimport { prisma } from '@/lib/prisma';\n\nexport async function GET() {\n  const stations = await prisma.reading.findMany({\n    select: { station: true, pollutantId: true },\n    distinct: ['station', 'pollutantId'],\n  });\n\n  return NextResponse.json(stations);\n}"],"names":["GET","stations","reading","findMany","select","station","pollutantId","distinct","json"],"mappings":";;;;AAAA;AACA;;;AAEO,eAAeA;IACpB,MAAMC,WAAW,MAAM,2IAAM,CAACC,OAAO,CAACC,QAAQ,CAAC;QAC7CC,QAAQ;YAAEC,SAAS;YAAMC,aAAa;QAAK;QAC3CC,UAAU;YAAC;YAAW;SAAc;IACtC;IAEA,OAAO,kKAAY,CAACC,IAAI,CAACP;AAC3B"}}]
+}
