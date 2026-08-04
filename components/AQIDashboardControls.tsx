@@ -13,6 +13,10 @@ export default function AQIDashboardControls() {
   const [selectedStation, setSelectedStation] = useState<string>('');
   const [selectedPollutant, setSelectedPollutant] = useState<string>('');
 
+  const [insight, setInsight] = useState<string>('');
+  const [loadingInsight, setLoadingInsight] = useState(false);
+
+
   useEffect(() => {
     fetch('/api/stations')
       .then((res) => res.json())
@@ -29,6 +33,26 @@ export default function AQIDashboardControls() {
   const pollutantsForStation = options
     .filter((o) => o.station === selectedStation)
     .map((o) => o.pollutantId);
+
+    async function fetchInsight() {
+    setLoadingInsight(true);
+  setInsight('');
+  try {
+    const res = await fetch(`/api/insight?station=${encodeURIComponent(selectedStation)}&pollutantId=${selectedPollutant}`);
+    const data = await res.json();
+    if (data.error) {
+      setInsight(`Error: ${data.error}`);
+    } else {
+      setInsight(data.insight);
+    }
+  } catch (err) {
+    setInsight('Something went wrong fetching the insight.');
+    console.error(err);
+  } finally {
+    setLoadingInsight(false);
+  }
+  }
+
 
   return (
     <div style={{ marginBottom: '2rem' }}>
@@ -59,6 +83,15 @@ export default function AQIDashboardControls() {
 
       {selectedStation && selectedPollutant && (
         <AQIChart station={selectedStation} pollutantId={selectedPollutant} />
+      )}
+
+      <button onClick={fetchInsight} disabled={loadingInsight} style={{ marginTop: '1rem', padding: '8px 16px' }}>
+        {loadingInsight ? 'Analyzing...' : 'Get AI Insight'}
+      </button>
+      {insight && (
+        <p style={{ marginTop: '1rem', padding: '12px', background: '#f3f4f6', borderRadius: '6px' }}>
+          {insight}
+        </p>
       )}
     </div>
   );

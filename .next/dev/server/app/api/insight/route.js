@@ -1,0 +1,11 @@
+var R=require("../../../chunks/[turbopack]_runtime.js")("server/app/api/insight/route.js")
+R.c("server/chunks/[root-of-the-server]__1m4ttx9._.js")
+R.c("server/chunks/1bor_next_1myhr-3._.js")
+R.c("server/chunks/1bor_google-auth-library_21b5ia8._.js")
+R.c("server/chunks/1bor_ws_1j41ae6._.js")
+R.c("server/chunks/1bor_@google_genai_dist_node_index_mjs_0s1zoh_._.js")
+R.c("server/chunks/[root-of-the-server]__0_-hvnw._.js")
+R.c("server/chunks/[root-of-the-server]__20jlya0._.js")
+R.c("server/chunks/aqi-project__next-internal_server_app_api_insight_route_actions_14fb62k.js")
+R.m("[project]/aqi-project/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/aqi-project/app/api/insight/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/aqi-project/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/aqi-project/app/api/insight/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

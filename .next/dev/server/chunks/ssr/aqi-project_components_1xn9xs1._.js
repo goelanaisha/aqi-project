@@ -126,6 +126,8 @@ function AQIDashboardControls() {
     const [options, setOptions] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [selectedStation, setSelectedStation] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
     const [selectedPollutant, setSelectedPollutant] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    const [insight, setInsight] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    const [loadingInsight, setLoadingInsight] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         fetch('/api/stations').then((res)=>res.json()).then((data)=>{
             setOptions(data);
@@ -137,6 +139,24 @@ function AQIDashboardControls() {
     }, []);
     const uniqueStations = Array.from(new Set(options.map((o)=>o.station)));
     const pollutantsForStation = options.filter((o)=>o.station === selectedStation).map((o)=>o.pollutantId);
+    async function fetchInsight() {
+        setLoadingInsight(true);
+        setInsight('');
+        try {
+            const res = await fetch(`/api/insight?station=${encodeURIComponent(selectedStation)}&pollutantId=${selectedPollutant}`);
+            const data = await res.json();
+            if (data.error) {
+                setInsight(`Error: ${data.error}`);
+            } else {
+                setInsight(data.insight);
+            }
+        } catch (err) {
+            setInsight('Something went wrong fetching the insight.');
+            console.error(err);
+        } finally{
+            setLoadingInsight(false);
+        }
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         style: {
             marginBottom: '2rem'
@@ -162,12 +182,12 @@ function AQIDashboardControls() {
                                 children: s
                             }, s, false, {
                                 fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
-                                lineNumber: 46,
+                                lineNumber: 70,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
-                        lineNumber: 36,
+                        lineNumber: 60,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -178,18 +198,18 @@ function AQIDashboardControls() {
                                 children: p
                             }, p, false, {
                                 fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
-                                lineNumber: 55,
+                                lineNumber: 79,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
-                        lineNumber: 50,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
-                lineNumber: 35,
+                lineNumber: 59,
                 columnNumber: 7
             }, this),
             selectedStation && selectedPollutant && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$components$2f$AQIchart$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -197,13 +217,39 @@ function AQIDashboardControls() {
                 pollutantId: selectedPollutant
             }, void 0, false, {
                 fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
-                lineNumber: 61,
+                lineNumber: 85,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                onClick: fetchInsight,
+                disabled: loadingInsight,
+                style: {
+                    marginTop: '1rem',
+                    padding: '8px 16px'
+                },
+                children: loadingInsight ? 'Analyzing...' : 'Get AI Insight'
+            }, void 0, false, {
+                fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
+                lineNumber: 88,
+                columnNumber: 7
+            }, this),
+            insight && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aqi$2d$project$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                style: {
+                    marginTop: '1rem',
+                    padding: '12px',
+                    background: '#f3f4f6',
+                    borderRadius: '6px'
+                },
+                children: insight
+            }, void 0, false, {
+                fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
+                lineNumber: 92,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/aqi-project/components/AQIDashboardControls.tsx",
-        lineNumber: 34,
+        lineNumber: 58,
         columnNumber: 5
     }, this);
 }
